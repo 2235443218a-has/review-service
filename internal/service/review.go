@@ -55,3 +55,20 @@ func (s *ReviewService) GetReview(ctx context.Context, req *pb.GetReviewRequest)
 func (s *ReviewService) ListReview(ctx context.Context, req *pb.ListReviewRequest) (*pb.ListReviewReply, error) {
 	return &pb.ListReviewReply{}, nil
 }
+
+// 商家评价回复
+func (s *ReviewService) ReplyReview(ctx context.Context, req *pb.ReplyReviewRequest) (*pb.ReplyReviewReply, error) {
+
+	//调用biz
+	reply, err := s.uc.GreateReplyReview(ctx, &biz.ReplyParam{
+		ReviewID:  req.ReviewID,
+		StoreID:   req.StoreID,
+		Content:   req.Content,
+		PicInfo:   req.PicInfo,
+		VideoInfo: req.VideoInfo,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &pb.ReplyReviewReply{ReplyID: reply.ReplyID}, nil
+}

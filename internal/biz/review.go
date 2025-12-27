@@ -13,6 +13,7 @@ type ReviewRepo interface {
 	// add methods here
 	SaveReview(context.Context, *model.ReviewInfo) (*model.ReviewInfo, error)
 	GetReviewByOrderID(context.Context, int64) ([]*model.ReviewInfo, error)
+	SaveReply(context.Context,*ReplyParam)(*ReplyParam,error)
 }
 type ReviewUsecase struct {
 	// add fields here
@@ -43,4 +44,11 @@ func (uc *ReviewUsecase) CreateReview(ctx context.Context, review *model.ReviewI
 	//查询订单和商品快照
 	//查询订单和商品快照
 	return uc.repo.SaveReview(ctx, review)
+}
+//创建商家回复
+func(uc *ReviewUsecase) GreateReplyReview(ctx context.Context, rpy *ReplyParam)(*ReplyParam,error){
+	//调用date层创建评价服务
+	uc.log.WithContext(ctx).Debug("biz Greate reply%v",rpy)
+
+	return uc.repo.SaveReply(ctx,rpy);
 }
