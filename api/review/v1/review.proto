@@ -16,12 +16,19 @@ service Review {
 			body: "*"
 		};
 	};
+	//B段回复评价
+	rpc ReplyReview(ReplyReviewRequest)returns (ReplyReviewReply){
+		option(google.api.http)={
+			post:"v1/review/appeal",
+			body:"*"
+		};
+	};
 	rpc UpdateReview (UpdateReviewRequest) returns (UpdateReviewReply);
 	rpc DeleteReview (DeleteReviewRequest) returns (DeleteReviewReply);
 	rpc GetReview (GetReviewRequest) returns (GetReviewReply);
 	rpc ListReview (ListReviewRequest) returns (ListReviewReply);
 	//B段回复评价
-	
+
 }
 
 //创建评价的参数
@@ -52,3 +59,15 @@ message GetReviewReply {}
 
 message ListReviewRequest {}
 message ListReviewReply {}
+//商家回复
+message ReplyReviewRequest{
+	int64 reviewID = 1 [(validate.rules).int64 = {gt: 0}];
+	int64 storeID = 2 [(validate.rules).int64 = {gt: 0}];
+	string content = 3 [(validate.rules).string = {min_len: 2, max_len:200}];
+	string picInfo = 4;
+	string videoInfo = 5;
+}
+//商家回复返回值
+message ReplyReviewReply{
+	int64 replyID = 1; //回复id
+}
