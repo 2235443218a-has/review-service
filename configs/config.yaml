@@ -1,0 +1,21 @@
+server:
+  http:
+    addr: 0.0.0.0:8000
+    timeout: 1s
+  grpc:
+    addr: 0.0.0.0:9000
+    timeout: 1s
+data:
+  database:
+    driver: mysql
+    # 👇 修改点 1: 端口从 3306 改成 1314
+    # 👇 修改点 2: 数据库名从 test 改成 review (如果你刚才建库用的名字是 review)
+    source: root:root1234@tcp(127.0.0.1:1314)/review?parseTime=True&loc=Local
+  redis:
+    # 👇 修改点 3: 端口从 6379 改成 1592
+    addr: 127.0.0.1:1592
+    read_timeout: 0.2s
+    write_timeout: 0.2s
+snowflake:
+  start_time: "2025-12-25" # 2023-10-01 00:00:00 UTC 的时间戳
+  machine_id: 1
