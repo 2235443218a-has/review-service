@@ -46,3 +46,27 @@ func IsOrderReviewed(err error) bool {
 func ErrorOrderReviewed(format string, args ...interface{}) *errors.Error {
 	return errors.New(123, ErrorReason_ORDER_REVIEWED.String(), fmt.Sprintf(format, args...))
 }
+
+func IsReplyReview(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_REPLY_REVIEW.String() && e.Code == 124
+}
+
+func ErrorReplyReview(format string, args ...interface{}) *errors.Error {
+	return errors.New(124, ErrorReason_REPLY_REVIEW.String(), fmt.Sprintf(format, args...))
+}
+
+func IsReviewNotFound(err error) bool {
+	if err == nil {
+		return false
+	}
+	e := errors.FromError(err)
+	return e.Reason == ErrorReason_REVIEW_NOT_FOUND.String() && e.Code == 125
+}
+
+func ErrorReviewNotFound(format string, args ...interface{}) *errors.Error {
+	return errors.New(125, ErrorReason_REVIEW_NOT_FOUND.String(), fmt.Sprintf(format, args...))
+}

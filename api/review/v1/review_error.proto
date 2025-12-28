@@ -13,5 +13,7 @@ enum ErrorReason {
     option (errors.default_code) = 500;
     NEED_LOGIN = 0 [(errors.code) = 404];
    DB_FAILED = 1 [(errors.code) = 500];
-   ORDER_REVIEWED = 2 [(errors.code) = 123];
+   ORDER_REVIEWED = 3 [(errors.code) = 123];
+    REPLY_REVIEW= 4 [(errors.code) = 124];
+    REVIEW_NOT_FOUND = 5 [(errors.code) = 125];
 }
